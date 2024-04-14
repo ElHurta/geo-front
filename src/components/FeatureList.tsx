@@ -43,7 +43,7 @@ function FeatureList() {
           pagination.perPage,
           filters
         );
-        setFeatures(data.data);
+        setFeatures(data.data ? data.data : []);
         setTotalPages(
           Math.ceil(data.meta.pagination.total / pagination.perPage)
         );
@@ -127,6 +127,13 @@ function FeatureList() {
                 </TableCell>
               </TableRow>
             ))}
+            {features.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={9} align="center">
+                  No features found
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
         <ButtonGroup variant="contained" aria-label="Basic button group">
