@@ -1,30 +1,49 @@
-# React + TypeScript + Vite
+# README - Proyecto Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introducción
 
-Currently, two official plugins are available:
+Este proyecto frontend es una aplicación web desarrollada con React y TypeScript que consume la API del proyecto backend para mostrar información sobre eventos sismológicos. La aplicación permite visualizar una lista de eventos con paginación y filtros, ver los detalles de un evento específico y crear comentarios asociados a cada evento.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Instrucciones de ejecución
 
-## Expanding the ESLint configuration
+### Requisitos previos
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node.js (versión 20.12.2)
+- npm (versión 9.8.1)
 
-- Configure the top-level `parserOptions` property like this:
+### Pasos para ejecutar el proyecto
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Nota: Es necesario tener el proyecto backend en ejecución para que la aplicación frontend pueda funcionar correctamente.
+
+1. Clonar el repositorio:
+
+```bash
+git clone https://github.com/ElHurta/geo-api
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Navegar al directorio del proyecto:
+
+```bash
+cd geo-front
+```
+
+3. Instalar las dependencias:
+
+```bash
+npm install
+```
+
+4. Iniciar la aplicación:
+
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:5173`.
+
+## Tecnologías utilizadas
+
+- React: Biblioteca de JavaScript para construir interfaces de usuario interactivas.
+- TypeScript: Superset de JavaScript que añade tipos estáticos opcionales.
+- Material-UI: Biblioteca de componentes de interfaz de usuario para React.
+- Axios: Cliente HTTP basado en promesas para realizar peticiones a la API.
