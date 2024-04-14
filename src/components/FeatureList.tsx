@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import { Feature, getFeatures } from "../services/features-service";
+import { Feature, Filters, getFeatures } from "../services/features-service";
 import {
   Button,
   ButtonGroup,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
+  SelectChangeEvent,
   Table,
   TableBody,
   TableCell,
@@ -19,7 +24,16 @@ function FeatureList() {
     perPage: 10,
   });
   const [totalPages, setTotalPages] = useState(0);
-  const [filters, setFilters] = useState({});
+  const [filters, setFilters] = useState<Filters>({
+    magType: [],
+  });
+
+  const handleFilterChange = (e: SelectChangeEvent) => {
+    setFilters({
+      ...filters,
+      magType: [...e.target.value],
+    });
+  };
 
   useEffect(() => {
     const fetchFeatures = async () => {
@@ -43,6 +57,26 @@ function FeatureList() {
 
   return (
     <div>
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="mag-type-label">Magnitude Type</InputLabel>
+        <Select
+          labelId="mag-type-label"
+          id="mag-type-select"
+          multiple
+          value={filters.magType}
+          label="Magnitude Type"
+          onChange={handleFilterChange}
+        >
+          <MenuItem value="md">MD</MenuItem>
+          <MenuItem value="ml">ML</MenuItem>
+          <MenuItem value="ms">MS</MenuItem>
+          <MenuItem value="mw">MW</MenuItem>
+          <MenuItem value="me">ME</MenuItem>
+          <MenuItem value="mi">MI</MenuItem>
+          <MenuItem value="mb">MB</MenuItem>
+          <MenuItem value="mlg">MLG</MenuItem>
+        </Select>
+      </FormControl>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="feature table">
           <TableHead>

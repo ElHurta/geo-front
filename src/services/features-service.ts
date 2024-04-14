@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from "axios";
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api/v1/', // Reemplaza con la URL base de tu API
+  baseURL: "http://localhost:3000/api/v1/", // Reemplaza con la URL base de tu API
 });
 
 export interface Feature {
@@ -44,46 +44,66 @@ interface GetFeaturesResponse {
   };
 }
 
+export interface Filters {
+  magType: string[];
+}
+
 export const getFeatures = async (
   page: number,
   perPage: number,
-  filters: any
+  filters: Filters
 ): Promise<GetFeaturesResponse> => {
   try {
-    const response: AxiosResponse<GetFeaturesResponse> = await api.get('/features', {
-      params: {
-        page,
-        per_page: perPage,
-        filters,
-      },
-    });
+    const params: any = {
+      page,
+      per_page: perPage,
+    };
+
+    if (filters) {
+      params["filters[mag_type]"] = filters.magType.join(",");
+    }
+
+    const response: AxiosResponse<GetFeaturesResponse> = await api.get(
+      "/features",
+      {
+        params,
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error('Error fetching features:', error);
+    console.error("Error fetching features:", error);
     throw error;
   }
 };
 
 export const getFeature = async (id: number): Promise<Feature> => {
   try {
-    const response: AxiosResponse<{ data: Feature }> = await api.get(`/features/${id}`);
+    const response: AxiosResponse<{ data: Feature }> = await api.get(
+      `/features/${id}`
+    );
     return response.data.data;
   } catch (error) {
-    console.error('Error fetching feature:', error);
+    console.error("Error fetching feature:", error);
     throw error;
   }
 };
 
-export const createComment = async (featureId: number, body: string): Promise<Comment> => {
+export const createComment = async (
+  featureId: number,
+  body: string
+): Promise<Comment> => {
   try {
-    const response: AxiosResponse<Comment> = await api.post(`/features/${featureId}/comments`, {
-      comment: {
-        body,
-      },
-    });
+    const response: AxiosResponse<Comment> = await api.post(
+      `/features/${featureId}/comments`,
+      {
+        comment: {
+          body,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error('Error creating comment:', error);
+    console.error("Error creating comment:", error);
     throw error;
   }
 };
