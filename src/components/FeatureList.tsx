@@ -16,6 +16,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function FeatureList() {
   const [features, setFeatures] = useState<Feature[]>([]);
@@ -90,6 +91,7 @@ function FeatureList() {
               <TableCell align="right">Magnitude Type</TableCell>
               <TableCell align="right">Coordinates</TableCell>
               <TableCell align="right">External URL</TableCell>
+              <TableCell align="right">Comments</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -124,6 +126,14 @@ function FeatureList() {
                   >
                     Link
                   </a>
+                </TableCell>
+                <TableCell align="right">
+                  <Link
+                    to={`/features/${feature.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Button>Comments</Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}
